@@ -3,6 +3,7 @@ class User < ApplicationRecord
   validates :email, presence: true
   validates :password, length: { minimum: 5, allow_nil: true }
   has_many :posts
+  has_many :comments
 
   def password
     @password

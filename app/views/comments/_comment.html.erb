@@ -1,0 +1,23 @@
+<article>
+  <p><%= comment.content %></p>
+  <small>by <%= comment.user.email %></small>
+
+  <a href="#" class="comment-form-display">reply</a>
+  <div class="comment-form">
+    <%= render partial: 'comments/form', locals: {post: comment.post, parent: comment} %>
+  </div>
+
+  <hr />
+  <div class="sub-comment">
+    <%= render comment.comments.includes(:user) %>
+  </div>
+</article>
+
+ <script>
+  document.querySelectorAll('.comment-form-display').forEach((el) => {
+    el.addEventListener('click', (ev) => {
+      ev.preventDefault();
+      el.nextElementSibling.style = 'display: block;'
+    })
+  })
+ </script>
