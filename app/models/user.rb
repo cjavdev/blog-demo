@@ -4,6 +4,7 @@ class User < ApplicationRecord
   validates :password, length: { minimum: 5, allow_nil: true }
   has_many :posts
   has_many :comments
+  has_many :likes
 
   def password
     @password
