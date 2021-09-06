@@ -1,21 +1,19 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @post.title %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @post.description %>
-</p>
+<%= turbo_stream_from @post %>
+<div id="<%= dom_id(@post) %>">
+  <%= render @post %>
+</div>
 
 <%= render partial: 'likes/button', locals: { likeable: @post } %>
 
 <p>
   <strong>Comments:</strong>
 
-  <%= render @post.comments.where(parent_id: nil).includes(:user, :post, comments: :user).order(id: :desc) %>
+  <%= turbo_stream_from @post, :comments %>
+  <div id="comments">
+    <%= render @post.comments.where(parent_id: nil).includes(:user, :post, comments: :user).order(id: :desc) %>
+  </div>
   <%= render partial: 'comments/form', locals: { post: @post, parent: nil } %>
 </p>
 

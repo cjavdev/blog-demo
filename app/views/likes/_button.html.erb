@@ -1,5 +1,5 @@
 <%= likeable.likes.count %> Likes
-<% like = current_user.likes.find_by(likeable: likeable) %>
+<% like = current_user.likes.find_by(likeable: likeable) if !current_user.nil? %>
 <% if like.nil? %>
   <form action="/likes" method="post">
     <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
